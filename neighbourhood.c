@@ -11,7 +11,6 @@
 
 int  neibourhood_morooea(cell_t *c, int x, int y, int sizeX, int sizeY) {
     int i;
-
     int howManyN=0;//zmienna pomocnicza
 
     for(i= -1; i<2; i++){
@@ -33,6 +32,29 @@ int  neibourhood_morooea(cell_t *c, int x, int y, int sizeX, int sizeY) {
     if( (y-1) != -1 || (y-1) != sizeY)
         if(c[((x)*sizeY)+(y-1)].z == 1)
             howManyN++;
+
+    //printf("[%d] "howManyN);
 return howManyN;
 }
 
+int neibourhood_neumann(cell_t *c, int x, int y, int sizeX, int sizeY) {
+    int i;
+    int howManyN=0;//zmienna pomocnicza
+
+    if((x-1) != -1)
+        if(c[((x - 1) * sizeY) + (y)].z == 1)
+            howManyN++;
+
+    if((x+1) != sizeX)
+        if(c[((x+1) * sizeY) + (y)].z == 1)
+            howManyN++;
+
+    if((y-1) != -1)
+        if(c[((x) * sizeY) + (y-1)].z == 1)
+            howManyN++;
+
+    if((y+1) != sizeY)
+        if(c[((x) * sizeY) + (y+1)].z == 1)
+            howManyN++;
+    return howManyN;
+}

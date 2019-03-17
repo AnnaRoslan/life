@@ -22,31 +22,43 @@ void free_cell(cell_t *c, int sizeX, int sizeY){ //zwania pamiec ni mam pojecia 
     free(c);
 
 }
-void life( cell_t *c, int sizeX, int sizeY, int* howManyN) {
+void life( cell_t *c, int sizeX, int sizeY, int* howManyN,int which_one) {
+    int nr_born =3;
+    int nr_down_dead =2;
+    int nr_up_dead= 3;
 
     for (int i = 0; i < sizeX * sizeY; ++i) {howManyN[i] = 0;}
 
-    for (int i = 0; i < sizeX; i++)//{
-        for (int j = 0; j < sizeY; j++) //{
-            howManyN[i*sizeY+j] = neibourhood_morooea(c, i, j, sizeX, sizeY);
-
     for (int i = 0; i < sizeX; i++) {
         for (int j = 0; j < sizeY; j++) {
-            if (howManyN[i * sizeY + j] == 3)
+            //if(which_one ==8)
+                howManyN[(i * sizeY) + j] = neibourhood_morooea(c, i, j, sizeX, sizeY);
+            //if(which_one ==4)
+                 //howManyN[(i * sizeY) + j] = neibourhood_neumann(c, i, j, sizeX, sizeY);
+
+            //printf("|(%d)%d,%d|%d  ", ((i * sizeY) + j), i, j, howManyN[(i * sizeY) + j]);
+        }
+    }
+    for (int i = 0; i < sizeX; i++) {
+        for (int j = 0; j < sizeY; j++) {
+            if (howManyN[i * sizeY + j] == nr_born)
                 c[i * sizeY + j].z = 1;
             if (c[i * sizeY + j].z == 1)
-                if (howManyN[i * sizeY + j] < 2 || howManyN[i * sizeY + j] > 3)
+                if (howManyN[i * sizeY + j] < nr_down_dead || howManyN[i * sizeY + j] > nr_up_dead)
                     c[i * sizeY + j].z = 0;
         }
     }
 
 
+
+
 }
 
-void game(cell_t *c, int moves, int sizeX, int sizeY) {
+void game(cell_t *c, int moves, int sizeX, int sizeY,int which_neighbourhood) {
+    int which_one = which_neighbourhood;
     int *howManyN = calloc(sizeX*sizeY, sizeof(int));
     for (int i = 0; i < moves; i++)//{
-        life(c, sizeX,sizeY,howManyN);
+        life(c, sizeX,sizeY,howManyN,which_one);
     free(howManyN);
     // w przyszłosci tu gdzies trzeba zapisyc do pliku png
 }

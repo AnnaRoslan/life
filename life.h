@@ -16,9 +16,9 @@ cell_t* start( int sizeX, int sizeY);//tworzy komorki na planszy o wym s1Xs2 i w
 
 void free_cell(cell_t *c, int sizeX, int sizeY);//zwania pamiec ni mam pojecia czy to tak ma wygladac
 
-void life( cell_t *c, int sizeX, int sizeY, int* howManyN);//tu sie dzieje 1 ruch
+void life( cell_t *c, int sizeX, int sizeY, int* howManyN, int which_one);//tu sie dzieje 1 ruch
 
-void game(cell_t* c, int moves,int sizeX, int sizeY); // tu jest n ruchow
+void game(cell_t* c, int moves,int sizeX, int sizeY, int which_neighbourhood); // tu jest n ruchow
 
 
 #endif //LIFE_LIFE_H
