@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "life.h"
 #include "neighbourhood.h"
@@ -11,22 +12,29 @@
 void fill(cell_t *c);
 void print(cell_t* c, int s1,int s2);
 
-unsigned int time(void *pVoid);
+
 
 int main() {
+    clock_t start = clock();
     srand(time(NULL));
-    int s1 = 5; int s2=5;
-    int which_neighbourhood = 8;
+    int s1 = 100; int s2=100;
+    int which_neighbourhood = 81;
+/* nw dokładnie jak ale tos w stylu:
+*80 monrooe
+* 81 z filem
+* 40 neumana
+* 41 to z fimem
+*/
+    cell_t *c = Start(s1,s2);
+    randFill(c,s1,s2,88.0);
 
-    cell_t *c = start(s1,s2);
-    fill(c);
-    print(c,s1,s2);
-//randomFill(c,s1,s2,50)
-    game(c,2,s1,s2,which_neighbourhood);
-    print(c,s1,s2);
-    show(c,s1,s2);
+   // print(c,s1,s2);
+    game(c,100,s1,s2,which_neighbourhood);
+
     free_cell(c,s1,s2);
-
+    clock_t stop = clock();
+    double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
+    printf("\nTime elapsed: %.5f\n", elapsed);
     return 0;
 }
 

@@ -12,7 +12,7 @@ typedef struct cell{
     //int n;//ilosc sasiadow
 }cell_t;
 
-cell_t* start( int sizeX, int sizeY);//tworzy komorki na planszy o wym s1Xs2 i wypełnia 0 na poczatek
+cell_t* Start( int sizeX, int sizeY);//tworzy komorki na planszy o wym s1Xs2 i wypełnia 0 na poczatek
 
 void free_cell(cell_t *c, int sizeX, int sizeY);//zwania pamiec ni mam pojecia czy to tak ma wygladac
 

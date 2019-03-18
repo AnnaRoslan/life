@@ -7,6 +7,6 @@
 
 #include "life.h"
 
-void randfill(cell_t* c, int sizeX, int sizeY, double per);//losowo ustawia per% komorek jako zywe
+void randFill(cell_t* c, int sizeX, int sizeY, double per);//losowo ustawia per% komorek jako zywe
 
 #endif //LIFE_RAND_LIFE_H
