@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "life.h"
 #include "neighbourhood.h"
 #include "rand_life.h"
-#include "show.c"
+#include "show.h"
+#include "readParameters.h"
 
 
 void fill(cell_t *c);
@@ -14,28 +16,22 @@ void print(cell_t* c, int s1,int s2);
 
 
 
-int main() {
-    clock_t start = clock();
-    srand(time(NULL));
-    int s1 = 100; int s2=100;
-    int which_neighbourhood = 81;
-/* nw dokładnie jak ale tos w stylu:
-*80 monrooe
-* 81 z filem
-* 40 neumana
-* 41 to z fimem
-*/
-    cell_t *c = Start(s1,s2);
-    randFill(c,s1,s2,88.0);
+int main(int argc, char** argv) {
+//    if(argc == 1 ){
+//        fprintf(stderr, "Nie wystarczająca ilość argómentów");
+//        return 0;
+//    }
+    //else {
+        FILE * f = fopen("paremeters.txt","r") ;//== NULL ? fprintf(stderr,"Zła nazwa pliku") : printf("działa");
+               Parameter * parameter= readParameters(f);
 
-   // print(c,s1,s2);
-    game(c,100,s1,s2,which_neighbourhood);
 
-    free_cell(c,s1,s2);
-    clock_t stop = clock();
-    double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
-    printf("\nTime elapsed: %.5f\n", elapsed);
-    return 0;
+        srand(time(NULL));
+    game(100,parameter);
+//int a;
+//scanf("%d",&a);
+        return 0;
+   // }
 }
 
 void print(cell_t* c, int s1,int s2){// na potrzeby testu

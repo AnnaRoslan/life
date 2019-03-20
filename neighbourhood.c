@@ -8,10 +8,9 @@
 #include <stdio.h>
 
 
-
-int  neibourhood_morooea(cell_t *c, int x, int y, int sizeX, int sizeY) {
+short int  neibourhood_morooea(cell_t *c, int x, int y, int sizeX, int sizeY) {
     int i;
-    int howManyN=0;//zmienna pomocnicza
+    short int howManyN=0;//zmienna pomocnicza
 
     for(i= -1; i<2; i++){
         if((x-1) ==-1 || (x-1) == sizeX || (y+i) == -1 || (y+i) == sizeY) continue;
@@ -37,9 +36,9 @@ int  neibourhood_morooea(cell_t *c, int x, int y, int sizeX, int sizeY) {
 return howManyN;
 }
 
-int neibourhood_neumann(cell_t *c, int x, int y, int sizeX, int sizeY) {
+short int neibourhood_neumann(cell_t *c, int x, int y, int sizeX, int sizeY) {
     int i;
-    int howManyN=0;//zmienna pomocnicza
+   short  int howManyN=0;//zmienna pomocnicza
 
     if((x-1) != -1)
         if(c[((x - 1) * sizeY) + (y)].z == 1)

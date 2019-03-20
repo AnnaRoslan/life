@@ -37,5 +37,6 @@ void show(cell_t *c, int sizeX, int sizeY) {
         printf("\n");
     }
 
-    //msleep(200);
+    msleep(300);
+    Sleep(200);
 }
