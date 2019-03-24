@@ -3,12 +3,11 @@
 //
 #include <stdlib.h>
 #include "rand_life.h"
-#include"life.h"
+#include "life.h"
 
-
-void randFill(cell_t* c, int sizeX, int sizeY, double per){
-    int n = (int)((sizeX*sizeY)*(per/100));
-    int max = (sizeX*sizeY)-1;
-    for (int i=0; i<n; i++)
-        c[rand()%max].z = 1;
+void randFill(Cell* c, int sizeX, int sizeY, double per){
+  int density =(int) per;  
+    for(int i=0; i<(sizeX*sizeY); i++)
+        if(rand()% density ==0)
+            c[i].z=1;
 }
