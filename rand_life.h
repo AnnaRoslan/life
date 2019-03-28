@@ -8,6 +8,6 @@
 #include "life.h"
 
 // per - procent zywych komorek
-void randFill(Cell* c, int sizeX, int sizeY, double per);
+void randFill(Cell* cells, int sizeX, int sizeY, double per);
 
 #endif //LIFE_RAND_LIFE_H

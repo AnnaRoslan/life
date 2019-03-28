@@ -6,58 +6,54 @@
 #include "life.h"
 #include <stdio.h>
 
-int neibourhood_morooea(Cell* c, int x, int y, int sizeX, int sizeY) {
+int neibourhood_morooea(Cell* cells, int x, int y, int sizeX, int sizeY) {
     int i;
-    int howManyN = 0;
+    int NeighbourhoodCounter = 0;
 
     for(i= -1; i<2; i++){
         if((x-1) ==-1 || (x-1) == sizeX || (y+i) == -1 || (y+i) == sizeY) continue;
-        if(c[((x - 1) * sizeY) + (y + i)].z == 1)
-            howManyN++;
-//	printf("[ %d][%d] \n",(x-1),(y+i) );
+        if(cells[((x - 1) * sizeY) + (y + i)].z == 1)
+            NeighbourhoodCounter++;
     }
 
     if( (y+1) != -1 && (y+1) != sizeY){
-        if(c[((x)*sizeY)+(y+1)].z == 1)
-            howManyN++;
-//	printf("[ %d][%d] \n",(x),(y+1) );
-
+        if(cells[((x)*sizeY)+(y+1)].z == 1)
+            NeighbourhoodCounter++;
     }
 
     for(i= -1; i<2; i++){
         if((x+1) ==-1 || (x+1) == sizeX || (y+i) == -1 || (y+i) == sizeY) continue;
-        if(c[((x+1)*sizeY)+(y+i)].z == 1)
-            howManyN++;
-//	printf("[ %d][%d] \n",(x+1),(y+i) );
+        if(cells[((x+1)*sizeY)+(y+i)].z == 1)
+            NeighbourhoodCounter++;
     }
 
     if( (y-1) != -1  && (y-1) != sizeY){
-        if(c[((x)*sizeY)+(y-1)].z == 1)
-            howManyN++;
+        if(cells[((x)*sizeY)+(y-1)].z == 1)
+            NeighbourhoodCounter++;
 
-//	printf("[ %d][%d] \n",(x),(y-1) );
     }
-    return howManyN;
+    return NeighbourhoodCounter;
 }
 
-int neibourhood_neumann(Cell* c, int x, int y, int sizeX, int sizeY) {
-    int howManyN = 0;//zmienna pomocnicza
+int neibourhood_neumann(Cell* cells, int x, int y, int sizeX, int sizeY) {
+    int neighbourhoodCounter = 0;
 
     if((x-1) != -1)
-        if(c[((x - 1) * sizeY) + (y)].z == 1)
-            howManyN++;
+        if(cells[((x - 1) * sizeY)
+        + (y)].z == 1)
+            neighbourhoodCounter++;
 
     if((x+1) != sizeX)
-        if(c[((x+1) * sizeY) + (y)].z == 1)
-            howManyN++;
+        if(cells[((x+1) * sizeY) + (y)].z == 1)
+            neighbourhoodCounter++;
 
     if((y-1) != -1)
-        if(c[((x) * sizeY) + (y-1)].z == 1)
-            howManyN++;
+        if(cells[((x) * sizeY) + (y-1)].z == 1)
+            neighbourhoodCounter++;
 
     if((y+1) != sizeY)
-        if(c[((x) * sizeY) + (y+1)].z == 1)
-            howManyN++;
+        if(cells[((x) * sizeY) + (y+1)].z == 1)
+            neighbourhoodCounter++;
 
-    return howManyN;
+    return neighbourhoodCounter;
 }

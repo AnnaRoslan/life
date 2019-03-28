@@ -5,9 +5,9 @@
 #include "rand_life.h"
 #include "life.h"
 
-void randFill(Cell* c, int sizeX, int sizeY, double per){
-  int density =(int) per;  
+void randFill(Cell* cells, int sizeX, int sizeY, double per){
+  int density =(int) per;
     for(int i=0; i<(sizeX*sizeY); i++)
         if(rand()% density ==0)
-            c[i].z=1;
+            cells[i].z=1;
 }

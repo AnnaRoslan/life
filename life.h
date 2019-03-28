@@ -12,16 +12,10 @@ typedef struct {
     int y;
 } Cell;
 
-//tworzy komorki na planszy o wym s1Xs2 i wypełnia 0 na poczatek
 Cell* createMap(int sizeX, int sizeY);
 
-//zwania pamiec ni mam pojecia czy to tak ma wygladac
-void freeCell(Cell* c);
+void life(Cell* cells, int sizeX, int sizeY, int* howManyNeighbourhood, int whichNeighbourhood);
 
-//tu sie dzieje 1 ruch
-void life(Cell* c, int sizeX, int sizeY, int* howManyN, int whichOne);
-
-// tu jest n ruchow
-void playGame(Parameters gameParameters, Pic_png *image, char* pictureLocation);
+void playGame(Parameters gameParameters, Pic_png *image, char* dirName);
 
 #endif //LIFE_LIFE_H

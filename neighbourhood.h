@@ -6,8 +6,8 @@
 
 #include "life.h"
 
-int neibourhood_morooea(Cell* c, int x, int y, int sizeX, int sizeY);
+int neibourhood_morooea(Cell* cells, int x, int y, int sizeX, int sizeY);
 
-int neibourhood_neumann(Cell* c, int x, int y, int sizeX, int sizeY);
+int neibourhood_neumann(Cell* cells, int x, int y, int sizeX, int sizeY);
 
 #endif //LIFE_NEIGHBOURHOOD_iH

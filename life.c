@@ -12,7 +12,6 @@
 
 Cell* createMap(int sizeX, int sizeY) {
     Cell* c = malloc((sizeX * sizeY) * sizeof(*c ));
-
     if(!c)
         printf("Map could not be created\n");
     for(int i = 0; i < sizeX; i++){
@@ -25,77 +24,74 @@ Cell* createMap(int sizeX, int sizeY) {
     return c;
 }
 
-void life(Cell* c, int sizeX, int sizeY, int* howManyN, int whichOne) {
+void life(Cell* cells, int sizeX, int sizeY, int* howManyNeighbourhood, int whichNeighbourhood {
     int nr_born = 3;
     int nr_down_dead = 2;
     int nr_up_dead = 3;
 
     for (int i = 0; i < sizeX; i++) {
         for (int j = 0; j < sizeY; j++) {
-            if(whichOne == 8)
-                howManyN[(i * sizeY) + j] = neibourhood_morooea(c, i, j, sizeX, sizeY);
-            if(whichOne ==4)
-                howManyN[(i * sizeY) + j] = neibourhood_neumann(c, i, j, sizeX, sizeY);
+            if(whichNeighbourhood == 8)
+                howManyNeighbourhood[(i * sizeY) + j] = neibourhood_morooea(cells, i, j, sizeX, sizeY);
+            if(whichNeighbourhood ==4)
+                howManyNeighbourhood[(i * sizeY) + j] = neibourhood_neumann(cells, i, j, sizeX, sizeY);
         }
     }
     for (int i = 0; i < sizeX; i++) {
         for (int j = 0; j < sizeY; j++) {
-            if (howManyN[i * sizeY + j] == nr_born)
-                c[i * sizeY + j].z = 1;
-            if (c[i * sizeY + j].z == 1)
-                if (howManyN[i * sizeY + j] < nr_down_dead || howManyN[i * sizeY + j] > nr_up_dead)
-                    c[i * sizeY + j].z = 0;
+            if (howManyNeighbourhood[i * sizeY + j] == nr_born)
+                cells[i * sizeY + j].z = 1;
+            if (cells[i * sizeY + j].z == 1)
+                if (howManyNeighbourhood[i * sizeY + j] < nr_down_dead || howManyNeighbourhood[i * sizeY + j] > nr_up_dead)
+                    cells[i * sizeY + j].z = 0;
         }
     }
 }
 
-void playGame(Parameters gameParameters, Pic_png *image, char* pictureLocation) {
+void playGame(Parameters gameParameters, Pic_png *image, char* dirName) {
     int sizeX = gameParameters.sizeX;
     int sizeY = gameParameters.sizeY;
-    int moves = gameParameters.moves;
-    int whichOne = gameParameters.which_neighbourhood;
-    int randomFill = gameParameters.density;
-    int ifAnimation = gameParameters.animation;
-    int howManyPictures = 10;
-    int howLongSinceTheLastPicture = 5;
-    
+    int whichNeighbourhood = gameParameters.which_neighbourhood;
+    int howManyPictures = gameParameters.howManyPictures;
+    int howLongSinceTheLastPicture = gameParameters.howLongSinceTheLastPicture;
+
+    strcat(dirName,"/gen%d.png");
+
     int *howManyN = calloc( ( sizeX * sizeY), sizeof(*howManyN));
     if(!howManyN)
         printf("howManyN could not be allocated\n");
 
-    Cell *map =createMap(sizeX, sizeY);
-    if(!map)
+    Cell *cells =createMap(sizeX, sizeY);
+    if(!cells)
         printf("Map could not be created\n");
-    randFill(map, sizeX, sizeY, randomFill);
+    randFill(cells, sizeX, sizeY, gameParameters.density);
 
     char fileName[100];
 
-    if((whichOne == 8 || whichOne == 4)&& ifAnimation==1)
-        for (int i = 0; i < moves; i++) {
-            showMap(map, sizeX, sizeY);
+    if((whichNeighbourhood == 8 || whichNeighbourhood == 4)&& gameParameters.animation == 1)
+        for (int i = 0; i < gameParameters.moves; i++) {
+            showMap(cells, sizeX, sizeY);
             if( i % howLongSinceTheLastPicture == 0 && i< (howManyPictures * howLongSinceTheLastPicture) ){
-	    //	sprintf(fileName,"xx" , i);
-            	processFile(image, map);
+                sprintf(fileName,dirName, i);
+            	processFile(image, cells);
             	generatePng(fileName, image);
 	    }
            
-            life(map, sizeX, sizeY, howManyN, whichOne);
+            life(cells, sizeX, sizeY, howManyN, whichNeighbourhood);
         }
     else
-        for (int i = 0; i < moves; i++) {
+        for (int i = 0; i < gameParameters.moves; i++) {
             
             if( i % howLongSinceTheLastPicture == 0 && i< (howManyPictures * howLongSinceTheLastPicture) ){
-	    	sprintf(fileName,pictureLocation, i);
-            	processFile(image, map);
+	    	sprintf(fileName,dirName, i);
+            	processFile(image, cells);
             	generatePng(fileName, image);
 	    } 
-	    life(map, sizeX, sizeY, howManyN, whichOne);
+	    life(cells, sizeX, sizeY, howManyN, whichNeighbourhood);
         }
-
 
     png_free_data( image->png_ptr, image->info_ptr,PNG_FREE_ALL,-1);
     free(image);
     free(howManyN);
-    free(map);
-
+    free(cells);
 }
