@@ -35,4 +35,7 @@ typedef struct {
 
 void readParameters ( char *fileName, Parameters*, Pic_png* );
 
+
+int createDictionary (char * dirName);
+
 #endif //LIFE_LOADING_H

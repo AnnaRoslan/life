@@ -57,3 +57,20 @@ void readParameters (char *fileName, Parameters *gameParameters, Pic_png *image)
 
 }
 
+#ifdef _WIN32
+#include <io.h>
+#else
+#include<sys/stat.h>
+#endif
+
+int createDictionary (char * dirName){
+    char path[50] =  "../images/";
+    strcat(path,dirName);
+    dirName = path;
+#ifdef _WIN32
+    return mkdir(dirName);
+#else
+    return mkdir(dirName, S_IRUSR | S_IWUSR | S_IXUSR);
+#endif
+
+}
