@@ -20,7 +20,7 @@ void readParameters (char *fileName, Parameters *gameParameters, Pic_png *image)
         if (strlen(buf) > 1 && buf[0] != '#')
             break;
 
-    for(int n = 0; n < 6; n++) {
+    for(int n = 0; n < 8; n++) {
         for(i = 0; buf[i] != '='; i++)
             ;
         if(n==0)
@@ -35,6 +35,10 @@ void readParameters (char *fileName, Parameters *gameParameters, Pic_png *image)
             gameParameters->moves = atoi(buf+i+1);
         else if(n==5)
             gameParameters->animation = (short) atoi(buf+i+1);
+        else if(n==6)
+            gameParameters->howManyPictures = atoi(buf+i+1);
+        else if(n==7)
+            gameParameters->howLongSinceTheLastPicture =atoi(buf+i+1);
         fgets(buf, MAXBUF, fp);
     }
 

@@ -48,6 +48,9 @@ void generatePng(char* fileName, Pic_png* png) {
         free(png->rowPointers[y]);
     free(png->rowPointers);
 
+    png_destroy_write_struct( &png->png_ptr, &png->info_ptr);
+   png_destroy_info_struct(png->png_ptr, &png->info_ptr);
+
     fclose(fp);
 }
 

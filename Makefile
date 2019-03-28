@@ -1,2 +1,2 @@
 all:	
-	gcc *.c -o Life -lpng
+	gcc -g  *.c -o Life -lpng

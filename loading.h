@@ -17,6 +17,9 @@ typedef  struct {
     short int which_neighbourhood; // 80 sądziedztwo monrooea a 81 z filmem 40 sądziedztwo von neumanna 41 z fimem
     short int density;
     short int animation;
+    int howManyPictures;
+    int howLongSinceTheLastPicture;
+
 } Parameters;
 
 typedef struct {

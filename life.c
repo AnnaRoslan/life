@@ -49,12 +49,16 @@ void life(Cell* c, int sizeX, int sizeY, int* howManyN, int whichOne) {
     }
 }
 
-void playGame(Parameters gameParameters, Pic_png *image) {
+void playGame(Parameters gameParameters, Pic_png *image, char* pictureLocation) {
     int sizeX = gameParameters.sizeX;
     int sizeY = gameParameters.sizeY;
     int moves = gameParameters.moves;
     int whichOne = gameParameters.which_neighbourhood;
     int randomFill = gameParameters.density;
+    int ifAnimation = gameParameters.animation;
+    int howManyPictures = 10;
+    int howLongSinceTheLastPicture = 5;
+    
     int *howManyN = calloc( ( sizeX * sizeY), sizeof(*howManyN));
     if(!howManyN)
         printf("howManyN could not be allocated\n");
@@ -66,25 +70,32 @@ void playGame(Parameters gameParameters, Pic_png *image) {
 
     char fileName[100];
 
-    if((whichOne == 8 || whichOne == 4)&&gameParameters.animation==1)
-        for (int i = 0; i < 1; i++) {
+    if((whichOne == 8 || whichOne == 4)&& ifAnimation==1)
+        for (int i = 0; i < moves; i++) {
             showMap(map, sizeX, sizeY);
-           sprintf(fileName, "../images/gen%d.png", i);
-            if (i < 50) {
-            processFile(image, map);
-            generatePng(fileName, image);
-            }
+            if( i % howLongSinceTheLastPicture == 0 && i< (howManyPictures * howLongSinceTheLastPicture) ){
+	    //	sprintf(fileName,"xx" , i);
+            	processFile(image, map);
+            	generatePng(fileName, image);
+	    }
+           
             life(map, sizeX, sizeY, howManyN, whichOne);
         }
     else
-        for (int i = 0; i <= moves; i++) {
-            sprintf(fileName, "../images/gen%d.png", i);
-            if (i < 200) {
-            processFile(image, map);
-            generatePng(fileName, image);
+        for (int i = 0; i < moves; i++) {
+            
+            if( i % howLongSinceTheLastPicture == 0 && i< (howManyPictures * howLongSinceTheLastPicture) ){
+	    	sprintf(fileName,pictureLocation, i);
+            	processFile(image, map);
+            	generatePng(fileName, image);
+	    } 
+	    life(map, sizeX, sizeY, howManyN, whichOne);
         }
-            life(map, sizeX, sizeY, howManyN, whichOne);
-        }
+
+
+    png_free_data( image->png_ptr, image->info_ptr,PNG_FREE_ALL,-1);
+    free(image);
     free(howManyN);
     free(map);
+
 }

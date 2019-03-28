@@ -22,6 +22,6 @@ void freeCell(Cell* c);
 void life(Cell* c, int sizeX, int sizeY, int* howManyN, int whichOne);
 
 // tu jest n ruchow
-void playGame(Parameters gameParameters, Pic_png *image);
+void playGame(Parameters gameParameters, Pic_png *image, char* pictureLocation);
 
 #endif //LIFE_LIFE_H
