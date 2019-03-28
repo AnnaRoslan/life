@@ -66,11 +66,11 @@ void readParameters (char *fileName, Parameters *gameParameters, Pic_png *image)
 int createDictionary (char * dirName){
     char path[50] =  "../images/";
     strcat(path,dirName);
-    dirName = path;
+    strcpy(dirName,path);
 #ifdef _WIN32
-    return mkdir(dirName);
+   return mkdir(dirName);
 #else
-    return mkdir(dirName, S_IRUSR | S_IWUSR | S_IXUSR);
+   return mkdir(dirName, S_IRUSR | S_IWUSR | S_IXUSR);
 #endif
 
 }
