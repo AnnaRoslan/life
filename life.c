@@ -24,7 +24,7 @@ Cell* createMap(int sizeX, int sizeY) {
     return c;
 }
 
-void life(Cell* cells, int sizeX, int sizeY, int* howManyNeighbourhood, int whichNeighbourhood {
+void life(Cell* cells, int sizeX, int sizeY, int* howManyNeighbourhood, int whichNeighbourhood ){
     int nr_born = 3;
     int nr_down_dead = 2;
     int nr_up_dead = 3;
